@@ -1,0 +1,38 @@
+name: Code Coverage with Codecov
+
+on:
+  workflow_call:
+    inputs:
+      php:
+        description: PHP Version to use
+        default: 7.4
+        required: false
+        type: string
+
+jobs:
+  code-coverage:
+    name: Code Coverage
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@2
+        with:
+          php-version: ${{ inputs.php }}
+          coverage: xdebug
+          ini-values: xdebug.mode=coverage
+
+      - name: Install dependencies
+        uses: ramsey/composer-install@v1
+        with:
+          composer-options: --prefer-dist
+
+      - name: Test with coverage
+        run: vendor/bin/phpunit -v --coverage-text --coverage-clover coverage.xml
+
+      - name: Publish coverage report to Codecov
+        uses: codecov/codecov-action@v1
+        with:
+          file: ./coverage.xml

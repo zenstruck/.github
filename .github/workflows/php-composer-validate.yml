@@ -11,7 +11,6 @@ on:
 
 jobs:
   composer-validate:
-    name: Validate composer.json
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

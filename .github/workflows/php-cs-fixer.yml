@@ -10,7 +10,7 @@ on:
         type: string
 
 jobs:
-  cs-check:
+  cs:
     name: PHP Coding Standards
     runs-on: ubuntu-latest
     steps:

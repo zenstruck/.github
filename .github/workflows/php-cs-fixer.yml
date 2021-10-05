@@ -11,6 +11,7 @@ on:
 
 jobs:
   cs-check:
+    name: PHP Coding Standards
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

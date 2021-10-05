@@ -11,6 +11,7 @@ on:
 
 jobs:
   code-coverage:
+    name: Code Coverage
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code

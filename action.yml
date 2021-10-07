@@ -7,7 +7,7 @@ inputs:
   symfony:
     description: Symfony version to use
     required: true
-    default: *
+    default: '*'
   deps:
     description: Dependency versions (highest/lowest)
     required: true
@@ -18,29 +18,26 @@ inputs:
     default: phpunit
 
 runs:
-  using: "composite"
+  using: composite
   steps:
     - name: Checkout code
-        uses: actions/checkout@v2
+      uses: actions/checkout@v2
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
       with:
-        php-version: ${{ php }}
+        php-version: ${{ inputs.php }}
         coverage: none
         tools: flex
 
     - name: Install dependencies
       uses: ramsey/composer-install@v1
       with:
-        dependency-versions: ${{ deps }}
+        dependency-versions: ${{ inputs.deps }}
         composer-options: --prefer-dist
       env:
-        SYMFONY_REQUIRE: ${{ symfony }}
-
-    - name: Install PHPUnit
-      run: vendor/bin/simple-phpunit install
-      if: ${{ phpunit == 'simple-phpunit' }}
+        SYMFONY_REQUIRE: ${{ inputs.symfony }}
 
     - name: Test
-      run: vendor/bin/${{ phpunit }} -v
+      run: vendor/bin/${{ inputs.phpunit }} -v
+      shell: bash

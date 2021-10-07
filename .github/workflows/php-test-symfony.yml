@@ -1,0 +1,34 @@
+name: Test all supported PHP/Symfony Versions
+
+on:
+  workflow_call:
+    inputs:
+      phpunit:
+        description: PHPUnit script (phpunit/simple-phpunit)
+        required: false
+        default: phpunit
+        type: string
+
+jobs:
+  test:
+    name: PHP ${{ matrix.php }}, SF ${{ matrix.symfony }} - ${{ matrix.deps }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php: [ 7.4, 8.0 ]
+        deps: [ hightest ]
+        symfony: [ 4.4.*, 5.3.*, 5.4.* ]
+        include:
+          - php: 7.4
+            deps: lowest
+            symfony: '*'
+          - php: 8.0
+            deps: highest
+            symfony: 6.0.*
+    steps:
+      - uses: zenstruck/.github@php-test-symfony
+        with:
+          php: ${{ matrix.php }}
+          symfony: ${{ matrix.symfony }}
+          deps: ${{ matrix.deps }}
+          phpunit: ${{ inputs.phpunit }}

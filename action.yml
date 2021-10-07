@@ -1,0 +1,46 @@
+name: PHPUnit tests with Symfony
+
+inputs:
+  php:
+    description: PHP version to use
+    required: true
+  symfony:
+    description: Symfony version to use
+    required: true
+    default: *
+  deps:
+    description: Dependency versions (highest/lowest)
+    required: true
+    default: highest
+  phpunit:
+    description: PHPUnit script (phpunit/simple-phpunit)
+    required: true
+    default: phpunit
+
+runs:
+  using: "composite"
+  steps:
+    - name: Checkout code
+        uses: actions/checkout@v2
+
+    - name: Setup PHP
+      uses: shivammathur/setup-php@v2
+      with:
+        php-version: ${{ php }}
+        coverage: none
+        tools: flex
+
+    - name: Install dependencies
+      uses: ramsey/composer-install@v1
+      with:
+        dependency-versions: ${{ deps }}
+        composer-options: --prefer-dist
+      env:
+        SYMFONY_REQUIRE: ${{ symfony }}
+
+    - name: Install PHPUnit
+      run: vendor/bin/simple-phpunit install
+      if: ${{ phpunit == 'simple-phpunit' }}
+
+    - name: Test
+      run: vendor/bin/${{ phpunit }} -v

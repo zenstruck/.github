@@ -8,6 +8,11 @@ on:
         default: 7.4
         required: false
         type: string
+      phpunit:
+        description: PHPUnit script (phpunit/simple-phpunit)
+        required: false
+        default: phpunit
+        type: string
 
 jobs:
   code-coverage:
@@ -30,7 +35,7 @@ jobs:
           composer-options: --prefer-dist
 
       - name: Test with coverage
-        run: vendor/bin/phpunit -v --coverage-text --coverage-clover coverage.xml
+        run: vendor/bin/${{ inputs.phpunit }} -v --coverage-text --coverage-clover coverage.xml
 
       - name: Publish coverage report to Codecov
         uses: codecov/codecov-action@v1

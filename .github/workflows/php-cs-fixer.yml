@@ -10,7 +10,7 @@ on:
         type: string
       version:
         description: php-cs-fixer version to use
-        default: '*'
+        default: '3'
         required: false
         type: string
 

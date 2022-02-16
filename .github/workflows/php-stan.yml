@@ -1,0 +1,30 @@
+name: Static Code Analysis with PHPStan
+
+on:
+  workflow_call:
+    inputs:
+      php:
+        description: PHP Version to use
+        default: 8.1
+        required: false
+        type: string
+
+jobs:
+  sca:
+    name: Static Code Analysis
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ inputs.php }}
+          coverage: none
+
+      - name: Install Dependencies
+        uses: ramsey/composer-install@v1
+
+      - name: Run PHPStan
+        run: vendor/bin/phpstan --error-format=github

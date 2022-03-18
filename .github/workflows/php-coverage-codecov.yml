@@ -19,25 +19,7 @@ jobs:
     name: Code Coverage
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Setup PHP
-        uses: shivammathur/setup-php@v2
+      - uses: zenstruck/.github@php-coverage-codecov
         with:
-          php-version: ${{ inputs.php }}
-          coverage: xdebug
-          ini-values: xdebug.mode=coverage
-
-      - name: Install dependencies
-        uses: ramsey/composer-install@v1
-        with:
-          composer-options: --prefer-dist
-
-      - name: Test with coverage
-        run: vendor/bin/${{ inputs.phpunit }} -v --coverage-text --coverage-clover coverage.xml
-
-      - name: Publish coverage report to Codecov
-        uses: codecov/codecov-action@v1
-        with:
-          file: ./coverage.xml
+          php: ${{ matrix.php }}
+          phpunit: ${{ inputs.phpunit }}

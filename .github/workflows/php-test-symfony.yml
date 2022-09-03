@@ -16,7 +16,7 @@ jobs:
     strategy:
       matrix:
         php: [7.4, 8.0, 8.1]
-        deps: [hightest]
+        deps: [highest]
         symfony: [4.4.*, 5.4.*]
         include:
           - php: 7.4

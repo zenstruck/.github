@@ -4,7 +4,7 @@ description: Run PHPUnit tests with code coverage and upload results to codecov.
 inputs:
   php:
     description: PHP Version to use
-    default: '7.4'
+    default: '8.1'
     required: true
   phpunit:
     description: PHPUnit script (phpunit/simple-phpunit)

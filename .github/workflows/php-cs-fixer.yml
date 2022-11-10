@@ -5,8 +5,7 @@ on:
     inputs:
       php:
         description: PHP Version to use
-        default: 7.4
-        required: false
+        required: true
         type: string
       version:
         description: php-cs-fixer version to use

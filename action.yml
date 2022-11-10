@@ -21,7 +21,7 @@ runs:
   using: composite
   steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -31,7 +31,7 @@ runs:
         tools: flex
 
     - name: Install dependencies
-      uses: ramsey/composer-install@v1
+      uses: ramsey/composer-install@v2
       with:
         dependency-versions: ${{ inputs.deps }}
         composer-options: --prefer-dist

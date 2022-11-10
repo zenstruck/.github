@@ -15,7 +15,7 @@ runs:
   using: composite
   steps:
     - name: Checkout code
-      uses: actions/checkout@v2
+      uses: actions/checkout@v3
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2
@@ -25,7 +25,7 @@ runs:
         ini-values: xdebug.mode=coverage
 
     - name: Install dependencies
-      uses: ramsey/composer-install@v1
+      uses: ramsey/composer-install@v2
       with:
         composer-options: --prefer-dist
 
@@ -34,6 +34,6 @@ runs:
       shell: bash
 
     - name: Publish coverage report to Codecov
-      uses: codecov/codecov-action@v1
+      uses: codecov/codecov-action@v3
       with:
         file: ./coverage.xml

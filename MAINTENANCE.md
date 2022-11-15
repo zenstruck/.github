@@ -10,7 +10,12 @@
 
 ### Merging Process
 
-* Aside from merge commits, any commits made on the primary branch(es) should use the [Conventional Commit specification](https://www.conventionalcommits.org/en/v1.0.0/).
+* Aside from merge commits, any commits made on the primary branch(es) should use the [Conventional Commit specification](https://www.conventionalcommits.org/en/v1.0.0/) with the following supported prefixes:
+  * `feature:` new features
+  * `fix:` bug fixes
+  * `minor:` code typos, etc
+  * `chore:` ci/sca/cs
+  * `docs:` documentation updates/fixes
 * Use "Squash and merge" if the PR does one thing
   * When using this, there is the option to edit the commit message, ensure one of the above prefixes is added
 * Use "Create a merge commit" if there are multiple commits that make sense to be added to the changelog as separate items

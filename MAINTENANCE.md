@@ -10,11 +10,7 @@
 
 ### Merging Process
 
-* Aside from merge commits, any commits made on the primary branch(es) should be prefixed with one of the following:
-  * `[feature]`: new features
-  * `[bug]`: bug fixes
-  * `[minor]`: ci/sca/cs, code typos, etc
-  * `[doc]`: documentation updates/fixes
+* Aside from merge commits, any commits made on the primary branch(es) should use the [Conventional Commit specification](https://www.conventionalcommits.org/en/v1.0.0/).
 * Use "Squash and merge" if the PR does one thing
   * When using this, there is the option to edit the commit message, ensure one of the above prefixes is added
 * Use "Create a merge commit" if there are multiple commits that make sense to be added to the changelog as separate items
@@ -27,7 +23,7 @@
 [Semantic Versioning](https://semver.org/) (`MAJOR.MINOR.PATCH`) should be used with the following adjustments/clarifications based on the [Merging Process](#merging-process) prefixes:
 
 * If any of the commits ready to be released are _features_, create as _MINOR_ release
-* If all pending commits are only bug/minor/doc, create as _PATCH_ release
+* If all pending commits are only fix/minor/doc/chore, create as _PATCH_ release
 * _TODO - MAJOR releases_
 
 ### Release Process

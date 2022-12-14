@@ -1,20 +1,31 @@
-name: Run php-cs-fixer
-description: Run php-cs-fixer and commit any fixes
+name: Sync meta files with zenstruck/php-template
+description: Pulls latest meta files from zenstruck/php-template
 
 inputs:
-  php:
-    description: PHP Version to use
-    required: true
-    type: string
   key:
     description: GPG_PRIVATE_KEY
     required: true
     type: string
-  version:
-    description: php-cs-fixer version to use
-    default: '3'
+  license:
+    description: Sync LICENSE?
+    default: true
     required: false
-    type: string
+    type: boolean
+  codecov:
+    description: Sync .codecov.yml?
+    default: true
+    required: false
+    type: boolean
+  phpcsconfig:
+    description: Sync .php-cs-fixer.dist.php?
+    default: true
+    required: false
+    type: boolean
+  editorconfig:
+    description: Sync .editorconfig?
+    default: true
+    required: false
+    type: boolean
 
 runs:
   using: composite
@@ -22,15 +33,24 @@ runs:
     - name: Checkout code
       uses: actions/checkout@v3
 
-    - name: Setup PHP
-      uses: shivammathur/setup-php@v2
-      with:
-        php-version: ${{ inputs.php }}
-        coverage: none
-        tools: php-cs-fixer:${{ inputs.version }}
+    - name: Sync LICENSE
+      if: ${{ inputs.license }}
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/LICENSE -o LICENSE
+      shell: bash
 
-    - name: Fix CS
-      run: php-cs-fixer fix --diff --verbose
+    - name: Sync .editorconfig
+      if: ${{ inputs.editorconfig }}
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.editorconfig -o .editorconfig
+      shell: bash
+
+    - name: Sync .codecov.yml
+      if: ${{ inputs.codecov }}
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.codecov.yml -o .codecov.yml
+      shell: bash
+
+    - name: Sync .php-cs-fixer.dist.php
+      if: ${{ inputs.phpcsconfig }}
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.php-cs-fixer.dist.php -o .php-cs-fixer.dist.php
       shell: bash
 
     - name: Import GPG key
@@ -45,6 +65,6 @@ runs:
       with:
         branch: "${{ github.head_ref }}"
         commit_options: '-S'
-        commit_message: "bot: fix cs [skip ci]"
+        commit_message: "bot: sync with template [skip ci]"
         commit_user_email: "kevinbond@gmail.com"
         commit_user_name: "Kevin Bond (bot)"

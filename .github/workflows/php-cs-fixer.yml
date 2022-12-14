@@ -1,14 +1,10 @@
-name: Run php-cs-fixer and commit any fixes
+name: Check PHP Coding Standards with PHP-CS-Fixer
 
 on:
   workflow_call:
     inputs:
       php:
         description: PHP Version to use
-        required: true
-        type: string
-      gpg_private_key:
-        description: GPG private key
         required: true
         type: string
       version:
@@ -18,9 +14,8 @@ on:
         type: string
 
 jobs:
-  fixcs:
-    name: Fix CS
-    if: ${{ github.event_name == 'push' || github.event_name == 'schedule' }}
+  cs-check:
+    name: PHP Coding Standards
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -34,20 +29,4 @@ jobs:
           tools: php-cs-fixer:${{ inputs.version }}
 
       - name: Check CS
-        run: php-cs-fixer fix --verbose --diff
-
-      - name: Import GPG key
-        uses: crazy-max/ghaction-import-gpg@v5
-        with:
-          gpg_private_key: ${{ inputs.gpg_private_key }}
-          git_user_signingkey: true
-          git_commit_gpgsign: true
-
-      - name: Commit files fixed with php-cs-fixer
-        uses: stefanzweifel/git-auto-commit-action@v4.16.0
-        with:
-          branch: "${{ github.head_ref }}"
-          commit_options: '-S'
-          commit_message: "bot: fix cs [skip ci]"
-          commit_user_email: "kevinbond@gmail.com"
-          commit_user_name: "Kevin Bond (bot)"
+        run: php-cs-fixer fix --dry-run --diff

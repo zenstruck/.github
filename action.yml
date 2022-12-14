@@ -6,6 +6,10 @@ inputs:
     description: PHP Version to use
     required: true
     type: string
+  key:
+    description: GPG_PRIVATE_KEY
+    required: true
+    type: string
   version:
     description: php-cs-fixer version to use
     default: '3'
@@ -27,11 +31,12 @@ runs:
 
     - name: Fix CS
       run: php-cs-fixer fix --diff --verbose
+      shell: bash
 
     - name: Import GPG key
       uses: crazy-max/ghaction-import-gpg@v5
       with:
-        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        gpg_private_key: ${{ inputs.key }}
         git_user_signingkey: true
         git_commit_gpgsign: true
 

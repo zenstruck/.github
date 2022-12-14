@@ -1,15 +1,16 @@
-name: Code Coverage with Codecov
-description: Run PHPUnit tests with code coverage and upload results to codecov.io
+name: Run php-cs-fixer
+description: Run php-cs-fixer and commit any fixes
 
 inputs:
   php:
     description: PHP Version to use
-    default: '8.1'
     required: true
-  phpunit:
-    description: PHPUnit script (phpunit/simple-phpunit)
-    required: true
-    default: phpunit
+    type: string
+  version:
+    description: php-cs-fixer version to use
+    default: '3'
+    required: false
+    type: string
 
 runs:
   using: composite
@@ -21,19 +22,24 @@ runs:
       uses: shivammathur/setup-php@v2
       with:
         php-version: ${{ inputs.php }}
-        coverage: xdebug
-        ini-values: xdebug.mode=coverage
+        coverage: none
+        tools: php-cs-fixer:${{ inputs.version }}
 
-    - name: Install dependencies
-      uses: ramsey/composer-install@v2
+    - name: Fix CS
+      run: php-cs-fixer fix --diff --verbose
+
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v5
       with:
-        composer-options: --prefer-dist
+        gpg_private_key: ${{ secrets.GPG_PRIVATE_KEY }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
 
-    - name: Test with coverage
-      run: vendor/bin/${{ inputs.phpunit }} -v --coverage-text --coverage-clover coverage.xml
-      shell: bash
-
-    - name: Publish coverage report to Codecov
-      uses: codecov/codecov-action@v3
+    - name: Commit files fixed with php-cs-fixer
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
       with:
-        file: ./coverage.xml
+        branch: "${{ github.head_ref }}"
+        commit_options: '-S'
+        commit_message: "bot: fix cs [skip ci]"
+        commit_user_email: "kevinbond@gmail.com"
+        commit_user_name: "Kevin Bond (bot)"

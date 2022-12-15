@@ -44,7 +44,8 @@ return $config
         'nullable_type_declaration_for_default_null_value' => true,
         'phpdoc_types_order' => ['null_adjustment' => 'none', 'sort_algorithm' => 'none'],
         'phpdoc_separation' => false,
-        'header_comment' => ['header' => "This file is part of the {$package} package.\n\n(c) Kevin Bond <kevinbond@gmail.com>\n\nFor the full copyright and license information, please view the LICENSE\nfile that was distributed with this source code."]
+        'header_comment' => ['header' => "This file is part of the {$package} package.\n\n(c) Kevin Bond <kevinbond@gmail.com>\n\nFor the full copyright and license information, please view the LICENSE\nfile that was distributed with this source code."],
+        'method_argument_space' => ['on_multiline' => 'ignore'],
     ])
     ->setRiskyAllowed(true)
     ->setFinder($finder)

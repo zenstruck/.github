@@ -29,6 +29,10 @@ runs:
         coverage: none
         tools: php-cs-fixer:${{ inputs.version }}
 
+    - name: Pull Remote Changes
+      run: git pull
+      shell: bash
+
     - name: Fix CS
       run: php-cs-fixer fix --diff --verbose
       shell: bash
@@ -39,10 +43,6 @@ runs:
         gpg_private_key: ${{ inputs.key }}
         git_user_signingkey: true
         git_commit_gpgsign: true
-
-    - name: Pull Remote Changes
-      run: git pull
-      shell: bash
 
     - name: Commit files fixed with php-cs-fixer
       uses: stefanzweifel/git-auto-commit-action@v4.16.0

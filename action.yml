@@ -34,7 +34,7 @@ runs:
       uses: actions/checkout@v3
 
     - name: Sync LICENSE
-      if: ${{ inputs.license == true }}
+      if: inputs.license
       run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/LICENSE -o LICENSE
       shell: bash
 

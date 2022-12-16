@@ -34,22 +34,22 @@ runs:
       uses: actions/checkout@v3
 
     - name: Sync LICENSE
-      if: ${{ inputs.license && inputs.license != 'false' }}
+      if: ${{ inputs.license && inputs.license != 'false' }} # see https://github.com/actions/runner/issues/1483
       run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/LICENSE -o LICENSE
       shell: bash
 
     - name: Sync .editorconfig
-      if: ${{ inputs.editorconfig }}
+      if: ${{ inputs.editorconfig && inputs.editorconfig != 'false' }} # see https://github.com/actions/runner/issues/1483
       run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.editorconfig -o .editorconfig
       shell: bash
 
     - name: Sync .codecov.yml
-      if: ${{ inputs.codecov }}
+      if: ${{ inputs.codecov && inputs.codecov != 'false' }} # see https://github.com/actions/runner/issues/1483
       run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.codecov.yml -o .codecov.yml
       shell: bash
 
     - name: Sync .php-cs-fixer.dist.php
-      if: ${{ inputs.phpcsconfig }}
+      if: ${{ inputs.phpcsconfig && inputs.phpcsconfig != 'false' }} # see https://github.com/actions/runner/issues/1483
       run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.php-cs-fixer.dist.php -o .php-cs-fixer.dist.php
       shell: bash
 

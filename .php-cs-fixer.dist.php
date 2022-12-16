@@ -1,8 +1,11 @@
 <?php
 
-$finder = PhpCsFixer\Finder::create()
-    ->in([__DIR__.'/src', __DIR__.'/tests'])
-;
+if (!isset($finder)) {
+    $finder = PhpCsFixer\Finder::create()
+        ->in([__DIR__.'/src', __DIR__.'/tests'])
+    ;
+}
+
 $config = new PhpCsFixer\Config();
 $package = \json_decode(\file_get_contents(__DIR__.'/composer.json'), true)['name'];
 

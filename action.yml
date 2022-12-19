@@ -28,6 +28,8 @@ runs:
         php-version: ${{ inputs.php }}
         coverage: none
         tools: php-cs-fixer:${{ inputs.version }}
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Pull Remote Changes
       run: git pull

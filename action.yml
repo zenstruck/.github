@@ -15,6 +15,10 @@ inputs:
     default: '3'
     required: false
     type: string
+  token:
+    description: Composer token
+    required: false
+    type: string
 
 runs:
   using: composite
@@ -29,7 +33,7 @@ runs:
         coverage: none
         tools: php-cs-fixer:${{ inputs.version }}
       env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_TOKEN: ${{ inputs.token }}
 
     - name: Pull Remote Changes
       run: git pull

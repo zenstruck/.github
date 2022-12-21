@@ -25,6 +25,8 @@ runs:
   steps:
     - name: Checkout code
       uses: actions/checkout@v3
+      with:
+        token: ${{ inputs.token }}
 
     - name: Setup PHP
       uses: shivammathur/setup-php@v2

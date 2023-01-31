@@ -39,5 +39,5 @@ runs:
         SYMFONY_REQUIRE: ${{ inputs.symfony }}
 
     - name: Test
-      run: vendor/bin/${{ inputs.phpunit }} -v
+      run: vendor/bin/${{ inputs.phpunit }}
       shell: bash

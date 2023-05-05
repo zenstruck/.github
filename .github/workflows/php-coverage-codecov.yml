@@ -19,7 +19,7 @@ jobs:
     name: Code Coverage
     runs-on: ubuntu-latest
     steps:
-      - uses: zenstruck/.github/.github/actions/php-coverage-codecov@main
+      - uses: zenstruck/.github/.github/actions/php-coverage-codecov.yml@main
         with:
           php: ${{ inputs.php }}
           phpunit: ${{ inputs.phpunit }}

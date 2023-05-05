@@ -28,7 +28,7 @@ jobs:
           - php: 8.0
             symfony: 6.3.*
     steps:
-      - uses: zenstruck/.github/.github/actions/php-test-symfony@main
+      - uses: zenstruck/.github@php-test-symfony
         with:
           php: ${{ matrix.php }}
           symfony: ${{ matrix.symfony }}

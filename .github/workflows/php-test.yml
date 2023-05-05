@@ -21,7 +21,7 @@ jobs:
           - php: 8.0
             deps: lowest
     steps:
-      - uses: ./.github/actions/php-test-symfony
+      - uses: zenstruck/.github@php-test-symfony
         with:
           php: ${{ matrix.php }}
           deps: ${{ matrix.deps }}

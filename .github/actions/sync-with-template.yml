@@ -1,0 +1,80 @@
+name: Sync meta files with zenstruck/php-template
+description: Pulls latest meta files from zenstruck/php-template
+
+inputs:
+  key:
+    description: GPG_PRIVATE_KEY
+    required: true
+    type: string
+  token:
+    description: Composer token
+    required: true
+    type: string
+  license:
+    description: Sync LICENSE?
+    default: true
+    required: false
+    type: boolean
+  codecov:
+    description: Sync .codecov.yml?
+    default: true
+    required: false
+    type: boolean
+  phpcsconfig:
+    description: Sync .php-cs-fixer.dist.php?
+    default: true
+    required: false
+    type: boolean
+  editorconfig:
+    description: Sync .editorconfig?
+    default: true
+    required: false
+    type: boolean
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+      with:
+        token: ${{ inputs.token }}
+
+    - name: Sync LICENSE
+      if: ${{ inputs.license && inputs.license != 'false' }} # see https://github.com/actions/runner/issues/1483
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/LICENSE -o LICENSE
+      shell: bash
+
+    - name: Sync .editorconfig
+      if: ${{ inputs.editorconfig && inputs.editorconfig != 'false' }} # see https://github.com/actions/runner/issues/1483
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.editorconfig -o .editorconfig
+      shell: bash
+
+    - name: Sync .codecov.yml
+      if: ${{ inputs.codecov && inputs.codecov != 'false' }} # see https://github.com/actions/runner/issues/1483
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.codecov.yml -o .codecov.yml
+      shell: bash
+
+    - name: Sync .php-cs-fixer.dist.php
+      if: ${{ inputs.phpcsconfig && inputs.phpcsconfig != 'false' }} # see https://github.com/actions/runner/issues/1483
+      run: curl https://raw.githubusercontent.com/zenstruck/php-template/main/.php-cs-fixer.dist.php -o .php-cs-fixer.dist.php
+      shell: bash
+
+    - name: Import GPG key
+      uses: crazy-max/ghaction-import-gpg@v5
+      with:
+        gpg_private_key: ${{ inputs.key }}
+        git_user_signingkey: true
+        git_commit_gpgsign: true
+
+    - name: Pull Remote Changes
+      run: git pull
+      shell: bash
+
+    - name: Commit files fixed with php-cs-fixer
+      uses: stefanzweifel/git-auto-commit-action@v4.16.0
+      with:
+        branch: "${{ github.head_ref }}"
+        commit_options: '-S'
+        commit_message: "bot: sync with template [skip ci]"
+        commit_user_email: "kevinbond@gmail.com"
+        commit_user_name: "Kevin Bond (bot)"

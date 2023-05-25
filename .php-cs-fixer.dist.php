@@ -17,7 +17,7 @@ return $config
         '@PHP80Migration' => true,
         '@PHP80Migration:risky' => true,
         '@PHPUnit75Migration:risky' => true,
-        'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
+        //'multiline_whitespace_before_semicolons' => ['strategy' => 'new_line_for_chained_calls'],
         'multiline_comment_opening_closing' => true,
         'array_syntax' => ['syntax' => 'short'],
         'ordered_imports' => [

@@ -15,18 +15,18 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        php: [8.0, 8.1, 8.2]
+        php: [8.0, 8.1, 8.2, 8.3]
         deps: [highest]
-        symfony: [5.4.*, 6.2.*, 6.3.*]
+        symfony: [5.4.*, 6.3.*, 6.4.*]
         include:
           - php: 8.0
             deps: lowest
             symfony: '*'
         exclude:
           - php: 8.0
-            symfony: 6.2.*
-          - php: 8.0
             symfony: 6.3.*
+          - php: 8.0
+            symfony: 6.4.*
     steps:
       - uses: zenstruck/.github@php-test-symfony
         with:

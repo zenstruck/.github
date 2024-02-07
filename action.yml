@@ -23,6 +23,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Deprecation Notice
+      run: |
+        echo "::warning::This action is deprecated, use the zenstruck/.github/actions/php-cs-fixer@main action instead."
+      shell: bash
+
     - name: Checkout code
       uses: actions/checkout@v3
       with:

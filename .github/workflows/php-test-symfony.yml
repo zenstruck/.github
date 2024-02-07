@@ -32,6 +32,10 @@ jobs:
           - php: 8.1
             symfony: 7.0.*
     steps:
+      - name: Deprecation Notice
+        run: |
+          echo "::warning::This workflow is deprecated, use the zenstruck/.github/workflows/php-test-symfony.yml@main workflow instead."
+
       - uses: zenstruck/.github@php-test-symfony
         with:
           php: ${{ matrix.php }}

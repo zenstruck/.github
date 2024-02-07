@@ -18,10 +18,6 @@ jobs:
     name: PHP Coding Standards
     runs-on: ubuntu-latest
     steps:
-      - name: Deprecation Notice
-        run: |
-          echo "::warning::This workflow is deprecated, use the zenstruck/.github/workflows/php-cs-fixer.yml@main workflow instead."
-
       - name: Checkout code
         uses: actions/checkout@v3
 

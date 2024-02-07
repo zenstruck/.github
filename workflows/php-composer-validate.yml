@@ -14,10 +14,6 @@ jobs:
     name: Validate composer.json
     runs-on: ubuntu-latest
     steps:
-      - name: Deprecation Notice
-        run: |
-          echo "::warning::This workflow is deprecated, use the zenstruck/.github/workflows/php-composer-validate.yml@main workflow instead."
-
       - name: Checkout code
         uses: actions/checkout@v3
 

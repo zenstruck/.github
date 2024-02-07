@@ -19,10 +19,6 @@ jobs:
     name: Code Coverage
     runs-on: ubuntu-latest
     steps:
-      - name: Deprecation Notice
-        run: |
-          echo "::warning::This workflow is deprecated, use the zenstruck/.github/workflows/php-coverage-codecov.yml@main workflow instead."
-
       - uses: zenstruck/.github@php-coverage-codecov
         with:
           php: ${{ inputs.php }}

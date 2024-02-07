@@ -21,10 +21,6 @@ jobs:
           - php: 8.0
             deps: lowest
     steps:
-      - name: Deprecation Notice
-        run: |
-          echo "::warning::This workflow is deprecated, use the zenstruck/.github/workflows/php-test.yml@main workflow instead."
-
       - uses: zenstruck/.github@php-test-symfony
         with:
           php: ${{ matrix.php }}

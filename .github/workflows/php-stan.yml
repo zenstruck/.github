@@ -14,10 +14,6 @@ jobs:
     name: Static Code Analysis
     runs-on: ubuntu-latest
     steps:
-      - name: Deprecation Notice
-        run: |
-          echo "::warning::This workflow is deprecated, use the zenstruck/.github/workflows/php-stan.yml@main workflow instead."
-
       - name: Checkout Code
         uses: actions/checkout@v3
 

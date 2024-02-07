@@ -34,6 +34,11 @@ inputs:
 runs:
   using: composite
   steps:
+    - name: Deprecation Notice
+      run: |
+        echo "::warning::This action is deprecated, use the zenstruck/.github/actions/sync-with-template@main action instead."
+      shell: bash
+
     - name: Checkout code
       uses: actions/checkout@v3
       with:
@@ -65,7 +70,7 @@ runs:
         gpg_private_key: ${{ inputs.key }}
         git_user_signingkey: true
         git_commit_gpgsign: true
-        
+
     - name: Pull Remote Changes
       run: git pull
       shell: bash

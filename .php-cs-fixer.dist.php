@@ -49,7 +49,7 @@ return $config
         'phpdoc_separation' => false,
         'header_comment' => ['header' => "This file is part of the {$package} package.\n\n(c) Kevin Bond <kevinbond@gmail.com>\n\nFor the full copyright and license information, please view the LICENSE\nfile that was distributed with this source code."],
         'method_argument_space' => ['on_multiline' => 'ignore'],
-        'trailing_comma_in_multiline' => ['elements' => ['arrays', 'match', 'parameters']],,
+        'trailing_comma_in_multiline' => ['elements' => ['arrays', 'match', 'parameters']],
     ])
     ->setRiskyAllowed(true)
     ->setFinder($finder)

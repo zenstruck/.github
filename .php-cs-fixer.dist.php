@@ -10,6 +10,7 @@ $config = new PhpCsFixer\Config();
 $package = \json_decode(\file_get_contents(__DIR__.'/composer.json'), true)['name'];
 
 return $config
+    ->setParallelConfig(PhpCsFixer\Runner\Parallel\ParallelConfigFactory::detect())
     ->setRules([
         '@Symfony' => true,
         '@Symfony:risky' => true,

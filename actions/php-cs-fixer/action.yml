@@ -46,14 +46,14 @@ runs:
       shell: bash
 
     - name: Import GPG key
-      uses: crazy-max/ghaction-import-gpg@v5
+      uses: crazy-max/ghaction-import-gpg@v6
       with:
         gpg_private_key: ${{ inputs.key }}
         git_user_signingkey: true
         git_commit_gpgsign: true
 
     - name: Commit files fixed with php-cs-fixer
-      uses: stefanzweifel/git-auto-commit-action@v4.16.0
+      uses: stefanzweifel/git-auto-commit-action@v5
       with:
         branch: "${{ github.head_ref }}"
         commit_options: '-S'

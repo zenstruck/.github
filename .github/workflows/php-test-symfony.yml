@@ -22,6 +22,11 @@ jobs:
           - php: 8.2
             deps: lowest
             symfony: '*'
+        exclude:
+          - php: 8.2
+            symfony: 8.0.*
+          - php: 8.3
+            symfony: 8.0.*
     steps:
       - uses: zenstruck/.github/actions/php-test-symfony@main
         with:

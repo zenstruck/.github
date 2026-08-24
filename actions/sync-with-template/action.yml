@@ -35,7 +35,7 @@ runs:
   using: composite
   steps:
     - name: Checkout code
-      uses: actions/checkout@v5
+      uses: actions/checkout@v7
       with:
         token: ${{ inputs.token }}
 
@@ -60,7 +60,7 @@ runs:
       shell: bash
 
     - name: Import GPG key
-      uses: crazy-max/ghaction-import-gpg@v6
+      uses: crazy-max/ghaction-import-gpg@v7
       with:
         gpg_private_key: ${{ inputs.key }}
         git_user_signingkey: true
@@ -71,7 +71,7 @@ runs:
       shell: bash
 
     - name: Commit files fixed with php-cs-fixer
-      uses: stefanzweifel/git-auto-commit-action@v5
+      uses: stefanzweifel/git-auto-commit-action@v7
       with:
         branch: "${{ github.head_ref }}"
         commit_options: '-S'

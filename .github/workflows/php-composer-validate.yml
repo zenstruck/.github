@@ -5,7 +5,7 @@ on:
     inputs:
       php:
         description: PHP Version to use
-        default: 8.1
+        default: 8.2
         required: false
         type: string
 

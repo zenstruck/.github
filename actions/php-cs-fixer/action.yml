@@ -42,7 +42,7 @@ runs:
       shell: bash
 
     - name: Fix CS
-      run: php-cs-fixer fix --diff --verbose
+      run: php-cs-fixer fix --diff --verbose --sequential
       shell: bash
 
     - name: Import GPG key
